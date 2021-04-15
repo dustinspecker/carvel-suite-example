@@ -1,0 +1,22 @@
+#@ load("@ytt:overlay", "overlay")
+
+#! add metadata.namespace to each resource
+#! when using overlay.all, we must specify an expects
+#! in this case, we expect at least 1 resource to be match
+#@overlay/match by=overlay.all, expects="1+"
+---
+metadata:
+  #! prevent errors when a resource doesn't even have a namespace key
+  #@overlay/match missing_ok=True
+  namespace: loki
+
+#! we'll need to take care of the ClusterRoleBinding's subject's namespace as well
+#@overlay/match by=overlay.subset({"kind": "ClusterRoleBinding", "metadata": {"name": "loki-stack-promtail-clusterrolebinding"}})
+---
+subjects:
+  #! we can tell ytt which subject to modify by specifying match by "name" key
+  #! there's only one subject, so many solutions to handle this
+  #@overlay/match by="name"
+  - name: loki-stack-promtail
+    namespace: loki
+

@@ -1,0 +1,21 @@
+#@ load("@ytt:overlay", "overlay")
+
+#@overlay/match by=overlay.subset({"kind": "Pod", "metadata": {"name": "loki-stack-test"}})
+---
+metadata:
+  annotations:
+    #! since pod specs are mostly immutable, we can instruct kapp to
+    #! to always re-create the test pod on updates via the update-strategy
+    #! annotation
+    #@overlay/match missing_ok=True
+    kapp.k14s.io/update-strategy: always-replace
+
+    #! We want to exercise the test pod everytime we deploy to verify
+    #! no breaking changes to the application occurred.
+    #! The nonce annotation forces the test pod to always have a change.
+    #@overlay/match missing_ok=True
+    kapp.k14s.io/nonce: ""
+spec:
+  #! We'll want the test pod to continuously re-run until it completes successfully.
+  restartPolicy: OnFailure
+

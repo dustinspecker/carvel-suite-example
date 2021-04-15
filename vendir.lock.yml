@@ -1,0 +1,15 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: 'Merge pull request #27570 from rifelpet/kops-url...'
+      sha: a88d09c6abee4e23137251ac40cadc733b1c252d
+      tags:
+      - 969a3db92-133-ga88d09c6a
+    path: nginx
+  - helmChart:
+      appVersion: v2.1.0
+      version: 2.3.1
+    path: loki-stack
+  path: deploy/synced
+kind: LockConfig

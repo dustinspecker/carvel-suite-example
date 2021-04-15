@@ -1,0 +1,12 @@
+#! this is a ytt comment, while #@ are ytt instructions
+
+#! load ytt's overlay module and name it overlay so we can *overlay* a new replica count later
+#@ load("@ytt:overlay", "overlay")
+
+#! We'll specify to ytt to only apply this overlay to a resource named nginx-deployment
+#! for a resource kind of Deployment
+#@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "nginx-deployment"}})
+---
+spec:
+  #! change spec.replicas to 3
+  replicas: 3

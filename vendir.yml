@@ -1,0 +1,36 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+# require a user to use at least version 0.18.0 of vendir
+minimumRequiredVersion: 0.18.0
+directories:
+  # this path is the top level directory to place retrieved assets
+  - path: deploy/synced
+    contents:
+      # this path will create a new directory within the above path, so
+      # `deploy/synced/nginx` will contain what's retrieved
+      - path: nginx
+        # retrieve from a Git repostiory
+        git:
+          # the path to a valid Git repository
+          url: https://github.com/kubernetes/website
+          # ref can be a branch, tag, or commit SHA
+          ref: master
+        # by default all files are fetched, but we only want the
+        # `deployment.yaml` file, so let vendir know
+        includePaths:
+          - content/en/examples/application/deployment.yaml
+        # by default, vendir would download the above included path to
+        # `deploy/synced/nginx/content/en/examples/application/deployment.yaml`,
+        # but we'd prefer to have `deploy/synced/nginx/deployment.yaml`, which
+        # we can have by specifying `newRootPath`
+        newRootPath: content/en/examples/application/
+      # `deploy/synced/loki-stack` will contain retrieved Helm chart
+      - path: loki-stack
+        helmChart:
+          # which Helm repository to find the desired Helm chart
+          repository:
+            url: https://grafana.github.io/helm-charts
+          # the name of the desired Helm chart in the above repository
+          name: loki-stack
+          # the specific version of the above Helm chart
+          version: "2.3.1"
