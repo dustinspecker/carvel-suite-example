@@ -1,6 +1,7 @@
 # carvel-suite-example
 
-> This repository is an example of using the [Carvel suite](https://carvel.dev/). A blog post on [DustinSpecker.com](https://dustinspecker.com) will provide more info later.
+> This repository is an example of using the [Carvel suite](https://carvel.dev/).
+> Read [Deploy Kubernetes Applications with the Carvel Suite](https://dustinspecker.com/posts/deploy-kubernetes-applications-carvel-suite/) for more info.
 
 ## Usage for Linux amd64
 
