@@ -26,7 +26,7 @@ executable(
 
 executable(
   name = "bin/ytt",
-  location = "https://github.com/vmware-tanzu/carvel-ytt/releases/download/v0.31.0/ytt-linux-amd64",
-  checksum = "6b9297ed0b414069c2bedaa01ea9f0cbc674448681d1c9cce57bf2c06fae7ef6141b27660911b7e8fbbfde0c8815fae28df880334f928aa910a24e13c8b57d25"
+  location = "https://github.com/vmware-tanzu/carvel-ytt/releases/download/v0.32.0/ytt-linux-amd64",
+  checksum = "1d6167e69e8d9c7fc3a1225dd46421351b4dbad79fe10688e92efafe2d793aaa4155fd31810fb93554be0205c0007850324d73b310d7b6fd3d8d60a4b2ef1885"
 )
 
