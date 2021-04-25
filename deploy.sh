@@ -26,7 +26,6 @@ while IFS= read -r -d '' app_directory ; do
   ytt \
     --file "$SYNCED_DIR" \
     --file "./deploy/overlays/$app_name" \
-    --ignore-unknown-comments \
   > "./deploy/rendered/$app_name/deploy.yaml"
 
 done < <(find ./deploy/synced/* -maxdepth 0 -type d -print0)
